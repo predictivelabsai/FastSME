@@ -25,6 +25,26 @@ python -m pytest tests/test_pages.py -v
 
 Browser artifacts are written to `output/playwright/`.
 
+## MCP server (early MVP)
+
+The repository also contains an initial read-only MCP service for connecting
+AI clients to FastCRM, FastAccounts and FastBI. Copy the MCP variables from
+`.env.example` into the git-ignored `.env`, then run:
+
+```bash
+python mcp_main.py
+```
+
+The Streamable HTTP endpoint is `http://localhost:8000/mcp` and its health
+check is `http://localhost:8000/healthz`. When `MCP_AUTH_SECRET` is set, MCP
+requests must include `Authorization: Bearer <secret>`. Product tools remain
+unavailable until the matching API base URL and key are configured.
+
+Current tools are read-only: integration status, CRM customer search,
+Accounts invoice lookup/overdue invoices, and a BI sales summary. The API
+paths are initial adapter contracts and must be checked against each product's
+actual API before enabling a live connection.
+
 ## Languages
 
 The public site is available in English, Estonian, German, French, Swedish,
